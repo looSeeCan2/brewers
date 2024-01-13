@@ -1,64 +1,62 @@
-//TODO: fetch the data.toJSON
-const fetchData = async () => {
-  try {
-    const response = await fetch("./data.json");
-    console.log(response);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-    alert(error);
-  }
+import click from "./utils/click.js";
+import table from "./table.js";
+
+const main = async (player) => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch("../data.json");
+      console.log(response);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
+
+  const brewersData = await fetchData();
+  console.table(brewersData);
+
+  ///Using elements other than table to display data
+
+  const grabMain = document.querySelector("main");
+  const grabMainSection = document.getElementById("main-section");
+  const grabMainSection2 = document.getElementById("main-section2");
+
+  ///for each
+  brewersData.forEach((player, index) => {
+    const createDiv = document.createElement("div");
+    //asign id to div
+    // createDiv.id = `${player.id}`;
+    createDiv.id = player.id;
+
+    //assign class to div
+    createDiv.className = "player";
+
+    const createImg = document.createElement("img");
+    createImg.src = player.picture;
+
+    createDiv.appendChild(createImg);
+    grabMainSection.appendChild(createDiv);
+
+    ///in each div with the picture, I want to add id, firstName, lastName
+    for (let key in player) {
+      // console.log(key);
+      if (key === "id" || key === "firstName" || key === "lastName") {
+        const createP = document.createElement("p");
+        createP.textContent = player[key];
+        createDiv.appendChild(createP);
+      }
+    }
+  });
+
+  ///click
+
+  const x = click(brewersData, grabMainSection, table);
+  console.log(x);
+
+  //table
+  // const y = table();
 };
-const fetchedData = await fetchData();
 
-const table = document.createElement("table");
-console.log(table);
-table.innerHTML = `
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Picture</th>
-      <th>Primary Position</th>
-      <th>Bat Side</th>
-      <th>Throw Side</th>
-      <th>Number</th>
-      <th>Birth City</th>
-      <th>Birth State Province</th>
-      <th>Birth Country</th>
-    </tr>
-  </thead>
-`;
-document.body.prepend(table);
-
-const tableBody = document.createElement("tbody");
-tableBody.className = "table-body";
-
-console.log(tableBody);
-
-/// fill the body
-
-//prettier-ignore
-fetchedData.forEach((player) => {
-  const tBodyRow = document.createElement("tr");
-  tBodyRow.innerHTML = `
-    <td>${player.id}</td>
-    <td>
-      <a target="_blank"href="https://www.mlb.com/player/${player.firstName.toLowerCase()}-${player.lastName.toLowerCase()}-${player.id}">${player.firstName}</a>
-    </td>
-    <td>${player.lastName}</td>
-    <td><img src="${player.picture}"></td>
-    <td>${player.primaryPosition}</td>
-    <td>${player.batSide}</td>
-    <td>${player.throwSide}</td>
-    <td>${player.number}</td>
-    <td>${player.birthCity}</td>
-    <td>${player.birthStateProvince}</td>
-    <td>${player.birthCountry}</td>
-  `;
-  tableBody.appendChild(tBodyRow);
-});
-
-table.appendChild(tableBody);
+main();

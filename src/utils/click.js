@@ -1,16 +1,19 @@
-const click = (brewersDataArg, grabMainSectionArg) => {
-  grabMainSectionArg.addEventListener("click", (e) => {
+import table from "../table.js";
+
+const click = (brewersDataArg, sectionArg, callbackArg) => {
+  sectionArg.addEventListener("click", (e) => {
     // console.log(e.target);
 
     let id = e.target.closest(".player").id;
 
-    let player = brewersDataArg.find((el) => {
+    let clickedPlayer = brewersDataArg.find((el) => {
       return el.id == id;
     });
 
-    console.log(player);
+    callbackArg(clickedPlayer);
   });
-  return grabMainSectionArg;
+
+  // return selectedPlayer;
 };
 
 export default click;
