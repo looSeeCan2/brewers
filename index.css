@@ -3,12 +3,17 @@ body {
   font-family: Arial, sans-serif;
 }
 
+#tableSection {
+  margin: 20% 20%;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -23,25 +28,23 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  th, td {
+  th,
+  td {
     padding: 6px;
   }
-  
+
   img {
     height: 40px;
   }
 }
 
 @media screen and (max-width: 576px) {
-  th, td {
+  th,
+  td {
     padding: 4px;
   }
-  
+
   img {
     height: 30px;
   }
 }
-
-
-
-
