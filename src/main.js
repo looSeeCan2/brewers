@@ -1,7 +1,7 @@
 import click from "./utils/click.js";
 import table from "./table.js";
 
-const main = async (player) => {
+export const main = async (player) => {
   const fetchData = async () => {
     try {
       const response = await fetch("../data.json");
@@ -18,7 +18,6 @@ const main = async (player) => {
   console.table(brewersData);
 
   ///Using elements other than table to display data
-
   const grabMain = document.querySelector("main");
   const grabMainSection = document.getElementById("main-section");
   const grabMainSection2 = document.getElementById("main-section2");
@@ -58,5 +57,3 @@ const main = async (player) => {
   //table
   // const y = table();
 };
-
-main();

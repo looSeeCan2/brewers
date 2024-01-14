@@ -1,52 +1,41 @@
 // ///call back function table: the parameter here is recieving the clickedPlayer from click.js
-// const table = (playerArg) => {
-//   console.log(playerArg);
-//   const grabTr = document.getElementById("header-row");
-
-//   // Object.keys
-//   const objKey = Object.keys(playerArg);
-//   console.log(objKey);
-
-//   objKey.forEach((el, index) => {
-//     console.log(el);
-//   });
-//   ///destructure object
 //   // return ;
 // };
 
-// export default table;
-
 const table = (playerArg) => {
   console.log(playerArg);
-  const grabTr = document.getElementById("header-row");
+  const grabHeaderRow = document.getElementById("header-row");
+  const grabDataTbodyRow = document.getElementById("data-tbody-row");
 
-  // Clear existing content (if any)
-  grabTr.innerHTML = "";
+  ///make you clear out the section
+  grabHeaderRow.innerHTML = "";
+  grabDataTbodyRow.innerHTML = "";
 
-  // Object.keys to get player property names
-  const objKeys = Object.keys(playerArg);
+  ///dont have to use this, but jsut practicing
+  const objKeysArray = Object.keys(playerArg);
+  console.log(objKeysArray);
 
-  // Create header cells for each property
-  objKeys.forEach((key) => {
-    const th = document.createElement("th");
-    th.textContent = key;
-    grabTr.appendChild(th);
+  ///slice. I only need primaryPosition and on
+  const sliceObjKeysArray = objKeysArray.slice(4, 11);
+  console.log(sliceObjKeysArray);
+
+  sliceObjKeysArray.forEach((el) => {
+    const createTh = document.createElement("th");
+    createTh.textContent = `${el}`;
+    grabHeaderRow.appendChild(createTh);
   });
 
-  // Create a new row for player data
-  const tbody = document.createElement("tbody");
-  const tr = document.createElement("tr");
+  //destruct
+  const { id, firstName, lastName, picture, ...upDatedPlayerArg } = playerArg;
 
-  // Fill in the data for each property
-  objKeys.forEach((key) => {
-    const td = document.createElement("td");
-    td.textContent = playerArg[key];
-    tr.appendChild(td);
-  });
+  console.log(playerArg);
+  console.log(upDatedPlayerArg);
 
-  // Append the new row to the table body
-  tbody.appendChild(tr);
-  document.getElementById("data-table").appendChild(tbody);
+  for (let key in upDatedPlayerArg) {
+    const createTd = document.createElement("td");
+    createTd.textContent = upDatedPlayerArg[key];
+    grabDataTbodyRow.appendChild(createTd);
+  }
 };
 
 export default table;
