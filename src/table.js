@@ -11,21 +11,31 @@ const table = (playerArg) => {
   grabHeaderRow.innerHTML = "";
   grabDataTbodyRow.innerHTML = "";
 
-  ///dont have to use this, but jsut practicing
-  const objKeysArray = Object.keys(playerArg);
-  console.log(objKeysArray);
+  const sliceObjKeysArray = Object.keys(playerArg); ///returns keys in an array
+  ///spread operator
+  const spreadSliceObjKeysArrayToArray = [...sliceObjKeysArray];
+  console.log(spreadSliceObjKeysArrayToArray);
 
-  ///slice. I only need primaryPosition and on
-  const sliceObjKeysArray = objKeysArray.slice(4, 11);
-  console.log(sliceObjKeysArray);
+  const [, , , , ...rest] = spreadSliceObjKeysArrayToArray; ///excludes elements that are not needed and stores the rest of values in a rest variable
+  console.log(rest);
 
-  sliceObjKeysArray.forEach((el) => {
+  const formatKeyNames = rest.map((el, index) => {
+    let elToArrayOfCharacters = [...el]; //['P', 'r', 'i', 'm', 'a', 'r', 'y', 'P', 'o', 's', 'i', 't', 'i', 'o', 'n']
+    elToArrayOfCharacters[0] = elToArrayOfCharacters[0].toUpperCase(); /// capitalize the element in the array
+
+    const joinElToArrayOfCharacters = elToArrayOfCharacters.join(""); ///change back to a string
+
+    return joinElToArrayOfCharacters;
+  });
+
+  ///populate table header row
+  formatKeyNames.forEach((el) => {
     const createTh = document.createElement("th");
     createTh.textContent = `${el}`;
     grabHeaderRow.appendChild(createTh);
   });
 
-  //destruct
+  //deconstruct
   const { id, firstName, lastName, picture, ...upDatedPlayerArg } = playerArg;
 
   console.log(playerArg);
