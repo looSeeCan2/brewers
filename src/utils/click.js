@@ -1,5 +1,3 @@
-import table from "../table.js";
-
 const click = (brewersDataArg, sectionArg, callbackArg) => {
   sectionArg.addEventListener("click", (e) => {
     // console.log(e.target);

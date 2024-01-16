@@ -1,6 +1,4 @@
-// ///call back function table: the parameter here is recieving the clickedPlayer from click.js
-//   // return ;
-// };
+import ul from "./ul.js";
 
 const table = (playerArg) => {
   console.log(playerArg);
@@ -46,6 +44,8 @@ const table = (playerArg) => {
     createTd.textContent = upDatedPlayerArg[key];
     grabDataTbodyRow.appendChild(createTd);
   }
+
+  ul(formatKeyNames, upDatedPlayerArg);
 };
 
 export default table;

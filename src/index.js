@@ -1,5 +1,6 @@
 import click from "./utils/click.js";
 import table from "./table.js";
+import ul from "./ul.js";
 
 const main = async (player) => {
   const fetchData = async () => {
@@ -22,6 +23,7 @@ const main = async (player) => {
   const grabMain = document.querySelector("main");
   const grabMainSection = document.getElementById("main-section");
   const grabMainSection2 = document.getElementById("main-section2");
+  const grabMainSection3 = document.getElementById("main-section3");
 
   ///for each
   brewersData.forEach((player, index) => {
@@ -51,12 +53,19 @@ const main = async (player) => {
   });
 
   ///click
-  ///callback function table
-  const x = click(brewersData, grabMainSection, table);
-  console.log(x);
+  grabMainSection.addEventListener("click", (e) => {
+    // console.log(e.target);
 
-  //table
-  // const y = table();
+    let id = e.target.closest(".player").id;
+
+    let clickedPlayer = brewersData.find((el) => {
+      return el.id == id; /// == the id attribute is a  string not a number
+    });
+    table(clickedPlayer);
+    ul(clickedPlayer, grabMainSection3);
+  });
+
+  // return selectedPlayer;
 };
 
 main();
