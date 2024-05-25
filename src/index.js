@@ -5,7 +5,7 @@ import ul from "./ul.js";
 const main = async (player) => {
   const fetchData = async () => {
     try {
-      const response = await fetch("../data.json");
+      const response = await fetch("./data.json");
       console.log(response);
       const data = await response.json();
       return data;
@@ -66,6 +66,7 @@ const main = async (player) => {
   });
 
   // return selectedPlayer;
+  ///test
 };
 
 main();
