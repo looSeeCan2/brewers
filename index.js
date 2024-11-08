@@ -1,19 +1,9 @@
-import HeaderRow from "./src/components/HeaderRow.js";
+import Table from "./src/components/Table.js";
+import fetchData from "./src/fetchdata.js";
 
-customElements.define("my-header-row", HeaderRow);
+const data = await fetchData();
 
-const fetchData = async () => {
-  try {
-    const response = await fetch("./data.json");
-    console.log(response);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-    alert(error);
-  }
-};
-const fetchedData = await fetchData();
+customElements.define("my-table", Table);
 
 // ///create the data attributes using the object
 // const table = document.createElement("table");
