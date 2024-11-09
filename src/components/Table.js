@@ -23,9 +23,19 @@ export default class Table extends HTMLElement {
     `;
 
     //TODO:return cells and append to tr
-    const cells = data.map((object) => {
-      console.table(object);
-    });
-    // this.setAttribute("data-headers", "testing");
+    ///map thru data to grab keys from first object for header values
+
+    const headerRow = this.shadowRoot.querySelector("#header-row");
+
+    const headerData = data[0];
+    console.log(headerData);
+
+    for (let key in headerData) {
+      console.log(key);
+      this.setAttribute("data-headers", "test, test");
+    }
+
+    // console.log(cells);
+    // headerRow.append(...cells);
   }
 }
