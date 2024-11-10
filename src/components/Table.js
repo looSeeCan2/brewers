@@ -17,8 +17,11 @@ export default class Table extends HTMLElement {
       this.dataset.header += `${keys},`;
     });
 
+    ///TODO: finish the body
     this.shadowRoot.innerHTML = `
-      <table>
+    <link rel="stylesheet" href="./src/components/index.css" />
+    
+    <table>
         <thead>
           <tr id="header-row">
         ${Object.keys(data[0])
@@ -26,17 +29,10 @@ export default class Table extends HTMLElement {
           .join("")}
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          
+        </tbody>
       </table>
     `;
-
-    //TODO:return cells and append to tr
-    ///map thru data to grab keys from first object for header values
-
-    // const headerRow = this.shadowRoot.querySelector("#header-row");
-
-    // console.log(cells);
-
-    // headerRow.append(...cells);
   }
 }
