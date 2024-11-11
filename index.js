@@ -1,9 +1,17 @@
 import Table from "./src/components/Table.js";
-import fetchData from "./src/fetchdata.js";
+import brewersData from "./src/brewers-data.js";
 
-const data = await fetchData();
+const data = await brewersData();
 
+console.log(data[0]);
 customElements.define("my-table", Table);
+
+const table = document.getElementById("my-table");
+console.log(table);
+
+table.tableValues = data;
+
+// table.connectedCallback(data[0]);
 
 // ///create the data attributes using the object
 // const table = document.createElement("table");

@@ -1,4 +1,4 @@
-const fetchData = async () => {
+const brewersData = async () => {
   try {
     const response = await fetch("./data.json");
     console.log(response);
@@ -11,4 +11,4 @@ const fetchData = async () => {
 };
 // const fetchedData = await fetchData();
 
-export default fetchData;
+export default brewersData;
