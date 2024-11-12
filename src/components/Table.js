@@ -1,8 +1,12 @@
 import brewersData from "../brewers-data.js";
 
-//there may be a better place for this variable. except I get an error when I place it anywhere else than top level or non async function
+/**
+ * @type {Array <object>}
+ * there may be a better place for this variable. except I get an error when I place it anywhere else than top level or non async function
+ */
 const data = await brewersData();
 
+/**@customElement */
 export default class Table extends HTMLElement {
   constructor() {
     super();
@@ -10,16 +14,19 @@ export default class Table extends HTMLElement {
   }
 
   connectedCallback() {
-    ///cant pass aragument to the connected callback.
-    ///keys of the object to values of data-header attribute
-    ///i dont think I have to do this part. but I just wanted to add them to the dataset for the component
-    ///remember that dataset attributes are limited to string values.
-    console.log(Object.keys(data[0]));
+    /**
+     * initializes custom element data
+     * probably did not have to do this. just for practice
+     * cant pass argument to the connected callback
+     * dataset attributes are limited to string values
+     */
     Object.keys(data[0]).map((keys) => {
-      console.log(keys[0].toLocaleUpperCase());
       this.dataset.header += `${keys},`;
     });
 
+    /**
+     * initialized table headers from dataset attributes
+     */
     this.shadowRoot.innerHTML = `
     <link rel="stylesheet" href="./src/components/index.css" />
     
@@ -38,26 +45,27 @@ export default class Table extends HTMLElement {
   }
 
   /**
-   * @param {any} data
+   * @param {Array <object>} data
+   * the if in the for loop adds the appropriate img tag and src attribute to the td
    */
 
   set tableValues(data) {
     const tbody = this.shadowRoot.querySelector("tbody");
 
     data.forEach((object) => {
-      console.log(object);
       const tbodyRow = document.createElement("tr");
+
       for (const key in object) {
-        const tdElement = document.createElement("td");
+        const tableData = document.createElement("td");
         if (key === "picture") {
           const imgElement = document.createElement("img");
           imgElement.setAttribute("src", object[key]);
-          tdElement.appendChild(imgElement);
+          tableData.appendChild(imgElement);
         } else {
-          tdElement.innerHTML = object[key];
+          tableData.innerHTML = object[key];
         }
 
-        tbodyRow.appendChild(tdElement);
+        tbodyRow.appendChild(tableData);
       }
 
       tbody.appendChild(tbodyRow);
