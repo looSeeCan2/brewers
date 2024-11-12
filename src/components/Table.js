@@ -10,17 +10,16 @@ export default class Table extends HTMLElement {
   }
 
   connectedCallback() {
-    ///cant pass aragu
+    ///cant pass aragument to the connected callback.
     ///keys of the object to values of data-header attribute
     ///i dont think I have to do this part. but I just wanted to add them to the dataset for the component
     ///remember that dataset attributes are limited to string values.
     console.log(Object.keys(data[0]));
     Object.keys(data[0]).map((keys) => {
-      console.log(keys);
+      console.log(keys[0].toLocaleUpperCase());
       this.dataset.header += `${keys},`;
     });
 
-    ///TODO: finish the body. I should do the setter, but whats the difference? Use a setter if the content is dynamic
     this.shadowRoot.innerHTML = `
     <link rel="stylesheet" href="./src/components/index.css" />
     
@@ -28,7 +27,7 @@ export default class Table extends HTMLElement {
         <thead>
           <tr id="header-row">
         ${Object.keys(data[0])
-          .map((keys) => `<th>${keys}</th>`)
+          .map((keys) => `<th>${keys.toUpperCase()}</th>`)
           .join("")}
           </tr>
         </thead>
@@ -42,12 +41,8 @@ export default class Table extends HTMLElement {
    * @param {any} data
    */
 
-  /// I need an array of: <td>`${value}`</td> to append to the <tr></tr>
   set tableValues(data) {
     const tbody = this.shadowRoot.querySelector("tbody");
-
-    // const tbodyRow = this.shadowRoot.querySelector("tbody tr");
-    // console.log(tbodyRow);
 
     data.forEach((object) => {
       console.log(object);
@@ -61,10 +56,6 @@ export default class Table extends HTMLElement {
         } else {
           tdElement.innerHTML = object[key];
         }
-
-        // key === "picture"
-        //   ? tdElement.setAttribute("src", object[key])
-        // : (tdElement.innerHTML = object[key]);
 
         tbodyRow.appendChild(tdElement);
       }
