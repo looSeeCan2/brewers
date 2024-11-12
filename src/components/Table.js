@@ -33,7 +33,8 @@ export default class Table extends HTMLElement {
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
+          <tr>
+          </tr>
         </tbody>
       </table>
     `;
@@ -42,17 +43,25 @@ export default class Table extends HTMLElement {
   /**
    * @param {any} data
    */
-  set tableValues(data) {
-    console.log(data);
-    const x = data.map((item) => {
-      const cells = Object.values(item).map((item) => {
-        console.log(item);
-        return `<td>${item}</td>`;
-      });
-      console.log(cells);
-      return cells;
-    });
 
-    console.log(x);
+  /// I need an array of: <td>`${value}`</td> to append to the <tr></tr>
+  set tableValues(data) {
+    const tbody = this.shadowRoot.querySelector("tbody");
+
+    // const tbodyRow = this.shadowRoot.querySelector("tbody tr");
+    // console.log(tbodyRow);
+
+    data.forEach((value) => {
+      console.log(value);
+      const tbodyRow = document.createElement("tr");
+      for (const key in value) {
+        const tdElement = document.createElement("td");
+        tdElement.textContent = value[key];
+
+        tbodyRow.appendChild(tdElement);
+      }
+
+      tbody.appendChild(tbodyRow);
+    });
   }
 }
