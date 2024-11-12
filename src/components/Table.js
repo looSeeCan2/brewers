@@ -33,8 +33,6 @@ export default class Table extends HTMLElement {
           </tr>
         </thead>
         <tbody>
-          <tr>
-          </tr>
         </tbody>
       </table>
     `;
@@ -51,12 +49,22 @@ export default class Table extends HTMLElement {
     // const tbodyRow = this.shadowRoot.querySelector("tbody tr");
     // console.log(tbodyRow);
 
-    data.forEach((value) => {
-      console.log(value);
+    data.forEach((object) => {
+      console.log(object);
       const tbodyRow = document.createElement("tr");
-      for (const key in value) {
+      for (const key in object) {
         const tdElement = document.createElement("td");
-        tdElement.textContent = value[key];
+        if (key === "picture") {
+          const imgElement = document.createElement("img");
+          imgElement.setAttribute("src", object[key]);
+          tdElement.appendChild(imgElement);
+        } else {
+          tdElement.innerHTML = object[key];
+        }
+
+        // key === "picture"
+        //   ? tdElement.setAttribute("src", object[key])
+        // : (tdElement.innerHTML = object[key]);
 
         tbodyRow.appendChild(tdElement);
       }

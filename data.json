@@ -414,18 +414,5 @@
     "birthCity": "Santiago",
     "birthStateProvince": null,
     "birthCountry": "Dominican Republic"
-  },
-  {
-    "id": 123456,
-    "firstName": "Lucycan",
-    "lastName": "Adames",
-    "picture": "https://content.mlb.com/images/headshots/current/60x60/642715@4x.png",
-    "primaryPosition": "SS",
-    "batSide": "R",
-    "throwSide": "R",
-    "number": "27",
-    "birthCity": "Buffalo",
-    "birthStateProvince": null,
-    "birthCountry": "Dominican Republic"
   }
 ]
