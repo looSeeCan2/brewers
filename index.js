@@ -1,10 +1,9 @@
 import Table from "./src/components/Table.js";
-import brewersData from "./src/brewers-data.js";
+import data from "./src/data.js";
 
 customElements.define("my-table", Table);
 
-const data = await brewersData();
-
+const brewersData = await data("./brewers-data.json");
 const table = document.getElementById("my-table");
 
-table.tableValues = data;
+table.tableValues = brewersData;

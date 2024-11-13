@@ -1,10 +1,10 @@
-import brewersData from "../brewers-data.js";
-
+// import brewersData from "../brewers-data.js";
+import data from "../data.js";
 /**
  * @type {Array <object>}
  * there may be a better place for this variable. except I get an error when I place it anywhere else than top level or non async function
  */
-const data = await brewersData();
+const brewersData = await data("./brewers-data.json");
 
 /**@customElement */
 export default class Table extends HTMLElement {
@@ -13,14 +13,14 @@ export default class Table extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
+  /**
+   * initializes custom element data
+   * probably did not have to do this. just for practice
+   * cant pass argument to the connected callback
+   * dataset attributes are limited to string values
+   */
   connectedCallback() {
-    /**
-     * initializes custom element data
-     * probably did not have to do this. just for practice
-     * cant pass argument to the connected callback
-     * dataset attributes are limited to string values
-     */
-    Object.keys(data[0]).map((keys) => {
+    Object.keys(brewersData[0]).map((keys) => {
       this.dataset.header += `${keys},`;
     });
 
@@ -33,7 +33,7 @@ export default class Table extends HTMLElement {
     <table>
         <thead>
           <tr id="header-row">
-        ${Object.keys(data[0])
+        ${Object.keys(brewersData[0])
           .map((keys) => `<th>${keys.toUpperCase()}</th>`)
           .join("")}
           </tr>
