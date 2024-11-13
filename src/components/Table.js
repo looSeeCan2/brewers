@@ -50,7 +50,7 @@ export default class Table extends HTMLElement {
    */
 
   set tableValues(data) {
-    const tbody = this.shadowRoot.querySelector("tbody");
+    const tableBody = this.shadowRoot.querySelector("tbody");
 
     data.forEach((object) => {
       const tbodyRow = document.createElement("tr");
@@ -68,7 +68,7 @@ export default class Table extends HTMLElement {
         tbodyRow.appendChild(tableData);
       }
 
-      tbody.appendChild(tbodyRow);
+      tableBody.appendChild(tbodyRow);
     });
   }
 }
