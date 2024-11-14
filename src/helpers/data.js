@@ -11,5 +11,3 @@ const data = async (item) => {
 };
 
 export default data;
-///TODO: fixed this to make it more reusable by passing in any data that i want.
-/// changed some names to reflect reusable component

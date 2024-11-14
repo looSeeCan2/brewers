@@ -1,11 +1,10 @@
 // import brewersData from "../brewers-data.js";
-import data from "../data.js";
+import data from "../helpers/data.js";
 /**
  * @type {Array <object>}
  * there may be a better place for this variable. except I get an error when I place it anywhere else than top level or non async function
  */
 const brewersData = await data("./brewers-data.json");
-
 /**@customElement */
 export default class Table extends HTMLElement {
   constructor() {
@@ -53,22 +52,26 @@ export default class Table extends HTMLElement {
     const tableBody = this.shadowRoot.querySelector("tbody");
 
     data.forEach((object) => {
-      const tbodyRow = document.createElement("tr");
+      const tableBodyRow = document.createElement("tr");
 
       for (const key in object) {
-        const tableData = document.createElement("td");
+        const tableBodyRowData = document.createElement("td");
         if (key === "picture") {
           const imgElement = document.createElement("img");
           imgElement.setAttribute("src", object[key]);
-          tableData.appendChild(imgElement);
+          tableBodyRowData.appendChild(imgElement);
         } else {
-          tableData.innerHTML = object[key];
+          tableBodyRowData.innerHTML = object[key];
         }
 
-        tbodyRow.appendChild(tableData);
+        tableBodyRow.appendChild(tableBodyRowData);
       }
 
-      tableBody.appendChild(tbodyRow);
+      tableBody.appendChild(tableBodyRow);
     });
   }
 }
+
+/**
+ * TODO: don't forget to commit . had no internet at work
+ */
